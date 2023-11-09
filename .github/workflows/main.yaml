@@ -25,14 +25,14 @@ jobs:
         push: true
         tags: disneycode/flightroutedisplay:v1.0.0
 
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download artifact
-      # You would typically download an artifact here or take some output from the previous job.
-      # This could be a docker-compose file, a kubernetes configuration, or just scripts to run.
+  # deploy:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Download artifact
+  #     # You would typically download an artifact here or take some output from the previous job.
+  #     # This could be a docker-compose file, a kubernetes configuration, or just scripts to run.
       
-    - name: Deploy to AWS
+  #   - name: Deploy to AWS
       # Here you would have steps that deploy the application to AWS, such as using AWS CLI
       # This is a placeholder and should be replaced with actual deployment steps.
