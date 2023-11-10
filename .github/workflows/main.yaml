@@ -84,8 +84,9 @@ jobs:
     - name: Set up Kubeconfig
       run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
 
-    # - name: Read Image Tag from File
-    #   run: IMAGE_TAG=$(cat image_tag.txt)
+    - name: Debug IMAGE_TAG
+      run: echo "IMAGE_TAG is: ${{ steps.read_image_tag.outputs.IMAGE_TAG }}"
+   
     - name: Debug Sed
       run: |
         echo "Contents of deployment.yaml before sed:"
