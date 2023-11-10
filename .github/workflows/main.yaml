@@ -64,7 +64,6 @@ jobs:
       - name: Set up Kubeconfig
         run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
 
-      
       # - name: Read Image Tag from File
       #   run: IMAGE_TAG=$(cat image_tag.txt)
       - name: Debug Sed
