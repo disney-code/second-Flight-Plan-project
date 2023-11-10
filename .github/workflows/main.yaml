@@ -24,7 +24,8 @@ jobs:
     - name: Debug Image Tag
       run: echo "IMAGE_TAG=${{ env.IMAGE_TAG }}"
     
-    
+    - run: mkdir -p path/to/artifact
+
     - name: Create Image Tag File
       run: echo $IMAGE_TAG > image_tag.txt
 
@@ -32,13 +33,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: image_tag
-        path: image_tag.txt
+        path: path/to/artifact/image_tag.txt
     
-    # - name: Verify image_tag.txt
-    #   working-directory: ${{ github.workspace }}/image_tag
-    #   run: |
-    #     ls -l
-    #     cat image_tag.txt
 
     - name: Build and Push Docker image
       uses: docker/build-push-action@v2
@@ -64,6 +60,12 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: image_tag
+        path: ${{ github.workspace }}
+    
+    - name: Verify Contents
+      run: |
+        ls -l ${{ github.workspace }}
+        cat ${{ github.workspace }}/image_tag.txt
     
     - name: Read IMAGE_TAG from File
       run: IMAGE_TAG=$(cat image_tag/image_tag.txt)
