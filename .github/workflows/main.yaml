@@ -7,6 +7,8 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    outputs:
+      IMAGE_TAG: ${{ steps.set-dynamic-tag.outputs.IMAGE_TAG }}
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -18,6 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     
     - name: Set Dynamic Tag
+      id: set-dynamic-tag
       run: echo "IMAGE_TAG=disneycode/2flightroutedisplay:v1.0.0-$(date +%s)" >> $GITHUB_ENV
 
     - name: Debug Image Tag
