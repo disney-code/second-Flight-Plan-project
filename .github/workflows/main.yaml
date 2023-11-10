@@ -35,8 +35,8 @@ jobs:
         path: image_tag.txt
     
     - name: Verify image_tag.txt
+      working-directory: ${{ github.workspace }}/image_tag
       run: |
-        cd $GITHUB_WORKSPACE/image_tag
         ls -l
         cat image_tag.txt
 
