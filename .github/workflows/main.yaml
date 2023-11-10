@@ -45,6 +45,9 @@ jobs:
     env:
       IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}
     steps:
+      - name: Check IMAGE_TAG
+        run: echo "IMAGE_TAG is: $IMAGE_TAG"
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
