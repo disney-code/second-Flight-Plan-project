@@ -319,7 +319,7 @@ catch (error) {
 
 		<form className="mt-3" onSubmit={handleSubmit}>
 	<div className="form-group">
-      <label htmlFor="flightNumber">Enter A Flight Number Hi Charlene Tan: </label>
+      <label htmlFor="flightNumber">Enter A Flight Number: </label>
       <input
       id="flightNumber"
         type="text"
