@@ -57,13 +57,19 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-    - name: Check Content of image_tag.txt
-      run: |
-        echo "Contents of image_tag.txt:"
-        cat image_tag.txt
-
     - name: Checkout Repository
       uses: actions/checkout@v2
+
+    - name: Download image_tag.txt Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: image_tag
+    
+    - name: Read IMAGE_TAG from File
+      run: IMAGE_TAG=$(cat image_tag/image_tag.txt)
+    
+    - name: Verify IMAGE_TAG
+      run: echo "IMAGE_TAG is: $IMAGE_TAG"
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -82,7 +88,6 @@ jobs:
     #   run: IMAGE_TAG=$(cat image_tag.txt)
     - name: Debug Sed
       run: |
-        echo "Deploying with IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}"
         echo "Contents of deployment.yaml before sed:"
         cat k8s/deployment.yaml
         sed -i "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" k8s/deployment.yaml
