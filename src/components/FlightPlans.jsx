@@ -319,8 +319,7 @@ catch (error) {
 
 		<form className="mt-3" onSubmit={handleSubmit}>
 	<div className="form-group">
-    <p>Test charlene</p>
-      <label htmlFor="flightNumber">Enter Flight Number 123 see if change is reflected: </label>
+      <label htmlFor="flightNumber">Enter A Flight Number Hi Charlene: </label>
       <input
       id="flightNumber"
         type="text"

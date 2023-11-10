@@ -23,7 +23,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: disneycode/2flightroutedisplay:v1.0.1
+        tags: disneycode/2flightroutedisplay:v1.0.0-$(date +%s)
   
   
   deploy:
