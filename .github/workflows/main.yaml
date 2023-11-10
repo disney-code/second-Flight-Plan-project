@@ -64,10 +64,16 @@ jobs:
       
       # - name: Read Image Tag from File
       #   run: IMAGE_TAG=$(cat image_tag.txt)
+      - name: Debug Sed
+        run: |
+          echo "Contents of deployment.yaml before sed:"
+          cat k8s/deployment.yaml
+          sed -i "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" k8s/deployment.yaml
+          echo "Contents of deployment.yaml after sed:"
+          cat k8s/deployment.yaml
 
       - name: Deploy to EKS
         run: |
-          sed -i "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" k8s/deployment.yaml
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
       
