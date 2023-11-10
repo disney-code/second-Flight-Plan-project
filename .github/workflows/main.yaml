@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: image_tag
-        path: path/to/artifact/image_tag.txt
+        path: ${{ github.workspace }}/image_tag.txt
     
 
     - name: Build and Push Docker image
@@ -60,7 +60,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: image_tag
-        path: ${{ github.workspace }}
+        
     
     - name: Verify Contents
       run: |
