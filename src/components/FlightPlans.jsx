@@ -208,8 +208,9 @@ catch(error){
       
       const data = await apiCallNavOrFix("navaids",point)
       // data can look like ['KAT (13.03,7.69)', 'KAT (-33.71,150.30)', 'KAT (7.16,79.87)']
-      console.log("call navaids for point:", point)
-      console.log("Below is the coordinate for this point:")
+      if (point==="SDG"){ console.log("call navaids for point:", point)}
+      // console.log("call navaids for point:", point)
+      // console.log("Below is the coordinate for this point:")
       console.log(data)
       //data look like ['DIK (46.86,-102.77)','DI (-12.35,49.30)','DIR (18.98,12.88)','DI (31.91,70.89)']
       const filteredData = data.filter(item => item.startsWith(point+' '));
