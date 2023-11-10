@@ -95,6 +95,7 @@ jobs:
       run: |
         echo "Contents of deployment.yaml before sed:"
         cat k8s/deployment.yaml
+        echo "IMAGE_TAG is '$IMAGE_TAG'"
         sed -i "s|\${IMAGE_TAG}|$IMAGE_TAG|g" k8s/deployment.yaml
         echo "Contents of deployment.yaml after sed:"
         cat k8s/deployment.yaml
