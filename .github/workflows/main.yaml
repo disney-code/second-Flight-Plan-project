@@ -89,14 +89,13 @@ jobs:
     - name: Set up Kubeconfig
       run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
 
-    - name: Debug IMAGE_TAG
-      run: echo "IMAGE_TAG is '${{ steps.read_image_tag.outputs.IMAGE_TAG }}'"
+
    
     - name: Debug Sed
       run: |
         echo "Contents of deployment.yaml before sed:"
         cat k8s/deployment.yaml
-        sed -i "s|\${IMAGE_TAG}|${{ steps.read_image_tag.outputs.IMAGE_TAG }}|g" k8s/deployment.yaml
+        sed -i "s|\${IMAGE_TAG}|$IMAGE_TAG|g" k8s/deployment.yaml
         echo "Contents of deployment.yaml after sed:"
         cat k8s/deployment.yaml
 
