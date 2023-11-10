@@ -85,7 +85,7 @@ jobs:
       run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
 
     - name: Debug IMAGE_TAG
-      run: echo "IMAGE_TAG is: ${{ steps.read_image_tag.outputs.IMAGE_TAG }}"
+      run: echo "IMAGE_TAG is: '${{ steps.read_image_tag.outputs.IMAGE_TAG }}'"
    
     - name: Debug Sed
       run: |
