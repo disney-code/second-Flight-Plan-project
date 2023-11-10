@@ -41,16 +41,22 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Set up Kubectl
-        uses: azure/setup-kubectl@v1
+        uses: azure/setup-kubectl@v3
 
-      - name: Set up EKS context
-        uses: aws-actions/amazon-eks-kubectl@v1
-        with:
-          cluster-name: myclusterFlightProject
+      - name: Set up Kubeconfig
+        run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
 
-      - name: Update Kubernetes deployment image
-        run: |
-          kubectl set image deployment/your-deployment your-container=disneycode/flightroutedisplay:v1.0.0 --record
+      # - name: Deploy to EKS
+      #   run: kubectl apply -f <your-kubernetes-manifest-file>
+
+      # - name: Set up EKS context
+      #   uses: aws-actions/amazon-eks-kubectl@v1
+      #   with:
+      #     cluster-name: myclusterFlightProject
+
+      # - name: Update Kubernetes deployment image
+      #   run: |
+      #     kubectl set image deployment/your-deployment your-container=disneycode/flightroutedisplay:v1.0.0 --record
 
   # deploy:
   #   needs: build-and-push
