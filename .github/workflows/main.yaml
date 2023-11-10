@@ -35,7 +35,7 @@ jobs:
         tags: ${{ env.IMAGE_TAG }}
     
     - name: Debug Docker Image Pull
-      run: docker pull disneycode/2flightroutedisplay:${{ env.IMAGE_TAG }}
+      run: docker pull ${{ env.IMAGE_TAG }}
 
   
   
