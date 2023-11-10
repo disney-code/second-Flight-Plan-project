@@ -27,9 +27,16 @@ jobs:
     
     - name: Create Image Tag File
       run: echo $IMAGE_TAG > image_tag.txt
+
+    - name: Create image_tag.txt Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: image_tag
+          path: image_tag.txt
     
     - name: Verify image_tag.txt
       run: |
+        cd $GITHUB_WORKSPACE/image_tag
         ls -l
         cat image_tag.txt
 
