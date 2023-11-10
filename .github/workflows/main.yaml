@@ -45,43 +45,43 @@ jobs:
     env:
       IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}
     steps:
-      - name: Check IMAGE_TAG
-        run: echo "IMAGE_TAG is: $IMAGE_TAG"
+    - name: Check IMAGE_TAG
+      run: echo "IMAGE_TAG is: $IMAGE_TAG"
 
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Set up Kubectl
-        uses: azure/setup-kubectl@v3
+    - name: Set up Kubectl
+      uses: azure/setup-kubectl@v3
 
-      - name: Set up Kubeconfig
-        run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
+    - name: Set up Kubeconfig
+      run: aws eks --region us-east-1 update-kubeconfig --name myclusterFlightProject
 
-      # - name: Read Image Tag from File
-      #   run: IMAGE_TAG=$(cat image_tag.txt)
-      - name: Debug Sed
-        run: |
-          echo "Contents of deployment.yaml before sed:"
-          cat k8s/deployment.yaml
-          sed -i "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" k8s/deployment.yaml
-          echo "Contents of deployment.yaml after sed:"
-          cat k8s/deployment.yaml
+    # - name: Read Image Tag from File
+    #   run: IMAGE_TAG=$(cat image_tag.txt)
+    - name: Debug Sed
+      run: |
+        echo "Contents of deployment.yaml before sed:"
+        cat k8s/deployment.yaml
+        sed -i "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" k8s/deployment.yaml
+        echo "Contents of deployment.yaml after sed:"
+        cat k8s/deployment.yaml
 
-      - name: Deploy to EKS
-        run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
-      
-      - name: Get Service Details
-        run: |
-          kubectl get svc
+    - name: Deploy to EKS
+      run: |
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+    
+    - name: Get Service Details
+      run: |
+        kubectl get svc
 
       # - name: Set up EKS context
       #   uses: aws-actions/amazon-eks-kubectl@v1
