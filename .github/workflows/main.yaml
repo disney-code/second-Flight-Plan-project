@@ -68,6 +68,7 @@ jobs:
     #   run: IMAGE_TAG=$(cat image_tag.txt)
     - name: Debug Sed
       run: |
+        echo "Deploying with IMAGE_TAG: ${{ needs.build-and-push.outputs.IMAGE_TAG }}"
         echo "Contents of deployment.yaml before sed:"
         cat k8s/deployment.yaml
         sed -i "s|\${IMAGE_TAG}|${IMAGE_TAG}|g" k8s/deployment.yaml
