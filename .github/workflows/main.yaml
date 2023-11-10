@@ -68,8 +68,13 @@ jobs:
         cat ${{ github.workspace }}/image_tag.txt
     
     - name: Read IMAGE_TAG from File
-      run: IMAGE_TAG=$(cat ${{ github.workspace }}/image_tag.txt)
+      run: |
+        IMAGE_TAG=$(cat ${{ github.workspace }}/image_tag.txt)
+        echo "IMAGE_TAG is '$IMAGE_TAG'"
       id: read_image_tag
+
+    - name: Debug IMAGE_TAG
+      run: echo "IMAGE_TAG is '${{ steps.read_image_tag.outputs.IMAGE_TAG }}'"
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
