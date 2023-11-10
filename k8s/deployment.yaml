@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: flightroutedisplay-container
-        image: disneycode/flightroutedisplay:v1.0.0
+        image: disneycode/2flightroutedisplay:v1.0.0
         ports:
         - containerPort: 80
