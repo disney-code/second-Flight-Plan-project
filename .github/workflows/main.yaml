@@ -34,11 +34,11 @@ jobs:
         name: image_tag
         path: image_tag.txt
     
-    - name: Verify image_tag.txt
-      working-directory: ${{ github.workspace }}/image_tag
-      run: |
-        ls -l
-        cat image_tag.txt
+    # - name: Verify image_tag.txt
+    #   working-directory: ${{ github.workspace }}/image_tag
+    #   run: |
+    #     ls -l
+    #     cat image_tag.txt
 
     - name: Build and Push Docker image
       uses: docker/build-push-action@v2
