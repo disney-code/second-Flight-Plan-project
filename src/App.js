@@ -2,7 +2,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import FlightPlan from './components/FlightPlans';
+import FlightPlan from './components/FlightPlans.jsx';
 function App() {
   return (
     <Router>

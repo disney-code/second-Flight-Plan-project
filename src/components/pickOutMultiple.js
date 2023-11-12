@@ -1,8 +1,8 @@
 
-//import { findClosestKAT } from './shortestDist';
-const { findClosestPoint } = require('./shortestDist');
-//import {filterOutEmptyPoints} from './filterOutEmptyPoints'
-const {filterOutEmptyPoints} = require('./filterOutEmptyPoints')
+import { findClosestPoint } from './shortestDist.js';
+//const { findClosestPoint } = require('./shortestDist');
+import {filterOutEmptyPoints} from './filterOutEmptyPoints.js';
+// const {filterOutEmptyPoints} = require('./filterOutEmptyPoints')
 function findObjectsWithMultipleCoordinates(results) {
 	//who calls this function? FlightPlans.jsx
 	// This function returns the points that prev had multiple coordinates but only return the right coordinate

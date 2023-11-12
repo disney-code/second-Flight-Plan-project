@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Polyline, Marker } from 'react-leaflet';
 import { latLngBounds, divIcon } from 'leaflet';
 import './map.css';
 import { renderToStaticMarkup } from 'react-dom/server'; // Import renderToStaticMarkup
-import FilledCircleMarker from './FilledCircleMarker';
+import FilledCircleMarker from './FilledCircleMarker.jsx';
 
 //data = {ANITO:[],PKP:[],LAMOB:[]} jdj
 function Map({data,waypoints}){

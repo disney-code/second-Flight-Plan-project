@@ -1,10 +1,10 @@
 import {useState,useEffect} from 'react';
 import axios from 'axios';
-import { apiCallNavFixAirport } from './callFixesApi';
-import {findObjectsWithMultipleCoordinates} from './pickOutMultiple'
-import {replaceObjects} from './cleanUpPointsNoduplicate'
-import Map from './Map';
-import ListOfFlights from './ListOfFlights'
+import { apiCallNavFixAirport } from './callFixesApi.js';
+import {findObjectsWithMultipleCoordinates} from './pickOutMultiple.js'
+import {replaceObjects} from './cleanUpPointsNoduplicate.jsx'
+import Map from './Map.jsx';
+import ListOfFlights from './ListOfFlights.jsx'
 function removeObjectsWithEmptyValues(arr) {
   return arr.filter(obj => Object.values(obj)[0].length > 0);
 }

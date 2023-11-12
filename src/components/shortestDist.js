@@ -50,7 +50,7 @@ function findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES) {
       }
       
 
-module.exports= {  findClosestPoint };
+export {  findClosestPoint };
 // const NAVAID_COORDINATES = {
 // 	KAT: [
 // 		[7.48, 28.31],
