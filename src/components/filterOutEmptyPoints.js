@@ -10,8 +10,14 @@ function filterOutEmptyPoints(data) {
 	});
       }
 
-export {filterOutEmptyPoints};
+      module.exports =  {filterOutEmptyPoints};
 
 
-// const data = [{RIC:[[1,2],[3,4]]},{ENPAG:[[]]},{VINAX:[[-12,34]]}]
+// const data = [{RIC:[[1,2],[3,4]]},{VINAX:[[-12,34]]}]
 // console.log(filterOutEmptyPoints(data))
+//const data = [{ENPAG:[[]]}]
+//const data = [{RIC:[[1,2],[3,4]]},{ENPAG:[[]]},{VINAX:[[-12,34]]}]
+
+//filterOutEmptyPoints(data) returns [{RIC:[[1,2],[3,4]]},{VINAX:[[-12,34]]}]
+// this function can return [] too if data=[{ENPAG:[[]]}]
+// this function returns [{RIC:[[1,2],[3,4]]},{VINAX:[[-12,34]]}] if data = [{RIC:[[1,2],[3,4]]},{VINAX:[[-12,34]]}]

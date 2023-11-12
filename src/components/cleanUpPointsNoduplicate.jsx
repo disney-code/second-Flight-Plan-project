@@ -4,6 +4,8 @@ function replaceObjects(resultObjects, finalArray) {
 	
 	// Create a map of keys in the finalArray for quick lookup
 	const finalArrayKeys = finalArray.map((item) => Object.keys(item)[0]);
+	
+	//finalArrayKeys may equal to [] if there is no point with multiple coordinates
 	//finalArrayKeys=['KAT', 'OKABU']
 	// Iterate over resultObjects
 	for (const resultObject of resultObjects) {
@@ -29,6 +31,16 @@ function replaceObjects(resultObjects, finalArray) {
 	return updatedResultObjects;
       }
 export {replaceObjects};
+// const resultObjects = [
+// 	{ KAT: [[-33.71, 150.3]] },
+// 	{ SULEN: [[4.41, 90.4]] },
+// 	{ OKABU: [[3.27, 94.85]] },
+// 	{ ARAMA: [[-33.71, 150.3]] }
+//       ];
+
+// const finalArray = [];
+
+// console.log(replaceObjects(resultObjects, finalArray))
 // Example data resultObjects is from flightPlans.jsx
 // const resultObjects = [
 // 	{ KAT: [[13.03, 7.69], [-33.71, 150.3], [7.16, 79.87]] },

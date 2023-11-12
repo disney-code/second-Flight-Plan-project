@@ -1,16 +1,19 @@
 
-import { findClosestKAT } from './shortestDist';
-import {filterOutEmptyPoints} from './filterOutEmptyPoints'
+//import { findClosestKAT } from './shortestDist';
+const { findClosestPoint } = require('./shortestDist');
+//import {filterOutEmptyPoints} from './filterOutEmptyPoints'
+const {filterOutEmptyPoints} = require('./filterOutEmptyPoints')
 function findObjectsWithMultipleCoordinates(results) {
 	//who calls this function? FlightPlans.jsx
-	console.log("Inside pickOutMultiple.jsx")
-	console.log("Below is results:")
-	console.log(results)
+	// This function returns the points that prev had multiple coordinates but only return the right coordinate
+	// this function returns [
+//   { LAPUG: [ 1.69, 103.41 ] },
+//   { MONTA: [ 21.56, 116.2 ] },
+//   { ARROW: [ 19.84, 114.37 ] }
+// ] as these points had multiple coordinates prev
+	//results argument to this function look like [{RIC:[[1,2],[3,4]]},{ENPAG:[[]]},{VINAX:[[-12,34]]}] 
+	
 	results = filterOutEmptyPoints(results)
-	console.log("2 Inside pickOutMultiple.jsx")
-	console.log("2 Below is results:")
-	console.log(results)
-	// for SIA 
 	//results  = [{HSN:[[29.93,122.36]]},{TOGUG:[[29.2, 122.53]]},{BEGMO:[[28,122.83]]},{LAPUG:[[1.69,103.41],[123,117.38]]},{BEBEM:[[22.95,116.36]]},{DOTMI:[[22.72,116.17]]},{MONTA:[21.56,116.20],[34.54,133.16],[10.92,122.52]},{ARROW:[-35,173.83],[19.84,114.37],[22.36,-155.21]},{EPDOS:[[19,113.56]]}]
 	const resultObjects = [];
 	let prevHasMultipleCoordinates = false;
@@ -54,7 +57,6 @@ function findObjectsWithMultipleCoordinates(results) {
 
 		}
 	} // end of for loop
-	console.log("inside pickOutMultiple.jsx line 54,resultObjects below: ")
 	console.log(resultObjects)
 	//end of adding on 4/11/23
 //resultObjects for SIA833 = [{LAPUG:[[1.69, 103.41],[23, 117.38]]},
@@ -84,7 +86,7 @@ function findObjectsWithMultipleCoordinates(results) {
 	// console.log('singleCoordinates: ',singleCoordinates)
 	const key = Object.keys(singleCoordinates)[0]
 	console.log("singleCoordinates[key] (line85): ",singleCoordinates[key][0] )
-	let tempObj=findClosestKAT(multipleCoordinates, singleCoordinates[key][0]) // returns an object like { OKABU: [ 3.27, 94.85 ] }
+	let tempObj=findClosestPoint(multipleCoordinates, singleCoordinates[key][0]) // returns an object like { OKABU: [ 3.27, 94.85 ] }
 	// multipleCoordinates = {UK: [[72.79, -56.13],[39.28, -123.24]...]}
 	// singleCoordinates[key][0] = [54.5,31.08]
 	
@@ -97,6 +99,15 @@ function findObjectsWithMultipleCoordinates(results) {
       }
 
 export {findObjectsWithMultipleCoordinates};
+
+
+//const results  = [{HSN:[[29.93,122.36]]},{TOGUG:[[29.2, 122.53]]},{BEGMO:[[28,122.83]]},{LAPUG:[[1.69,103.41],[123,117.38]]},{BEBEM:[[22.95,116.36]]},{DOTMI:[[22.72,116.17]]},{MONTA:[[21.56,116.20],[34.54,133.16],[10.92,122.52]]},{ARROW:[[-35,173.83],[19.84,114.37],[22.36,-155.21]]},{EPDOS:[[19,113.56]]}]
+//findObjectsWithMultipleCoordinates(results) = [
+//   { LAPUG: [ 1.69, 103.41 ] },
+//   { MONTA: [ 21.56, 116.2 ] },
+//   { ARROW: [ 19.84, 114.37 ] }
+// ]
+// console.log(findObjectsWithMultipleCoordinates(results))
 
 // results1 shld be data from the FlightPlans.jsx result variable 
 // const results1 = [

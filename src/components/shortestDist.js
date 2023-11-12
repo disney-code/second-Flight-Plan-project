@@ -23,13 +23,9 @@ function calculateDistance(coord1, coord2) {
 	return distance;
       }
       
-function findClosestKAT(NAVAID_COORDINATES, WAYPOINT_COORDINATES) {
+function findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES) {
 	//who calls findClosestKAT? pickOutMultiple.jsx
-	console.log("Inside shortestDist.js file")
-	console.log("Below is the first point(Inside shortestDist.js file): ")
-	console.log(NAVAID_COORDINATES)
-	console.log("Below is second coordinate(Inside shortestDist.js file): ")
-	console.log(WAYPOINT_COORDINATES)
+	
 	let closestKAT = null;
 	let minDistance = Number.MAX_VALUE;
       
@@ -48,14 +44,13 @@ function findClosestKAT(NAVAID_COORDINATES, WAYPOINT_COORDINATES) {
 	    }
 	  }
 	}
-      console.log("cloest coordinate: ")
-      console.log(closestKAT)
+      
 	return closestKAT;
 	//closestKAT looks like { OKABU: [ 3.27, 94.85 ] }
       }
       
-      // Export the function to use it in your React component
-export {  findClosestKAT };
+
+module.exports= {  findClosestPoint };
 // const NAVAID_COORDINATES = {
 // 	KAT: [
 // 		[7.48, 28.31],
@@ -63,9 +58,10 @@ export {  findClosestKAT };
 // 	],
 //       };
 //       const WAYPOINT_COORDINATES =  [-31.42, 116.29]
-// findClosestKAT(NAVAID_COORDINATES, WAYPOINT_COORDINATES)
+//       console.log("look below:")
+// console.log(findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES))
 
-
+//findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES)={ KAT: [ -30.55, 116.63 ] }
 //for SIA242, it is giving error because the first one the one with multiple coordinate
 //NAVAID_COORDINATES ={RIC:[
 //[37.5, -77.32],[-33.61, 150.8],[-33.6, 150.78]

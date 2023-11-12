@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import axios from 'axios';
-import { apiCallNavOrFix,apiCallAirports } from './callFixesApi';
+import { apiCallNavFixAirport } from './callFixesApi';
 import {findObjectsWithMultipleCoordinates} from './pickOutMultiple'
 import {replaceObjects} from './cleanUpPointsNoduplicate'
 import Map from './Map';
@@ -140,7 +140,8 @@ async function makeAirportCoordReq(point){
 try{
   console.log("Calling for Airport coordinate for point: ")
   console.log(point)
-const data = await apiCallAirports("airports", point)
+const data = await apiCallNavFixAirport("airports", point)
+console.log("apicall using for airport")
 console.log("airport ",point, 'data is ',data)
 const transformedData = [];
 if (data.length>0){
@@ -166,13 +167,21 @@ catch(error){
 }
 }
 
+
   async function makeApiRequest(point) {
+   
     // every point (e.g REVOP) will call makeApiRequest once 
     try {
       
       let callNavaids=false;  
-      const data = await apiCallNavOrFix("fixes",point)
+      if (point==="SDG"){console.log("ON LINE 178")}
+      const data = await apiCallNavFixAirport("fixes",point)
       // data may look like ['REVOP (7.48,28.31)', 'REVOP (-30.55,116.63)'] or ['JULIM (-31.42,116.29)']
+      if (point==="SDG"){console.log("ON LINE 181")
+    console.log("data look like: ")
+  console.log(data)
+console.log("line 184")}
+      
       const transformedData = [];
       if (data.length>0){
         // if you get into this block, means they found some data from the API call
@@ -205,10 +214,10 @@ catch(error){
 
 
         if (callNavaids){
-      
-      const data = await apiCallNavOrFix("navaids",point)
+          //if (point==="SDG"){ console.log("call navaids for point:", point)}
+      const data = await apiCallNavFixAirport("navaids",point)
       // data can look like ['KAT (13.03,7.69)', 'KAT (-33.71,150.30)', 'KAT (7.16,79.87)']
-      if (point==="SDG"){ console.log("call navaids for point:", point)}
+      //if (point==="SDG"){ console.log("call navaids for point:", point)}
       // console.log("call navaids for point:", point)
       // console.log("Below is the coordinate for this point:")
       console.log(data)
@@ -240,7 +249,7 @@ catch(error){
 
       else{
       
-      const data = await apiCallNavOrFix("navaids",point)
+      const data = await apiCallNavFixAirport("navaids",point)
      
       if (data.length>0){
         for(const item of data){
@@ -291,10 +300,7 @@ catch(error){
       
     
     }
-    // for (const item of designatedPoints) {
-    //   await makeApiRequest(item);
-      
-    // }
+   
   }
   
   processItems().then(()=>{
@@ -339,13 +345,7 @@ catch (error) {
       ) : (
         <Map data={cleanedResults} waypoints={waypoints} />
       )}
-    </div>
-      {/* <div>
-        
-      <Map data={cleanedResults} waypoints={waypoints} />
-      
-      </div> */}
-      
+    </div>      
     </div>
   );
 }
