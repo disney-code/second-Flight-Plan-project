@@ -1,4 +1,4 @@
-import { filterOutEmptyPoints } from '../components/filterOutEmptyPoints';
+import { filterOutEmptyPoints } from './components/filterOutEmptyPoints';
 
 describe('filterOutEmptyPoints function', () => {
   it('should filter out objects with empty point arrays', () => {

@@ -1,7 +1,7 @@
 // findClosestPoint is a function that returns the most logical cooridinate of a point out of all its possible
 // coordinates
 
-import { findClosestPoint } from '../components/shortestDist'
+import { findClosestPoint } from './components/shortestDist'
 
 describe('findClosestPoint function', () => {
   it('should return the closest point', () => {

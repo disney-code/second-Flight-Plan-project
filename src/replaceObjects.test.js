@@ -1,4 +1,4 @@
-import {replaceObjects} from '../components/cleanUpPointsNoduplicate';
+import {replaceObjects} from './components/cleanUpPointsNoduplicate';
 
 describe('replaceObjects function',()=>{
 it('should correctly replace objects whose array have more than 1 array',()=>{

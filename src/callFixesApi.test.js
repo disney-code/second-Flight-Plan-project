@@ -1,5 +1,5 @@
 import fetchMock from 'jest-fetch-mock';
-import {apiCallNavFixAirport} from '../components/callFixesApi';
+import {apiCallNavFixAirport} from './components/callFixesApi';
 
 fetchMock.enableMocks();
 

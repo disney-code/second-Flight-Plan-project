@@ -1,4 +1,4 @@
-import { findObjectsWithMultipleCoordinates } from '../components/pickOutMultiple';
+import { findObjectsWithMultipleCoordinates } from './components/pickOutMultiple';
 
 describe('findObjectsWithMultipleCoordinates function', () => {
   it('should return objects with multiple coordinates', () => {
