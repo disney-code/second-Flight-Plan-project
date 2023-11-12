@@ -15,7 +15,7 @@ RUN npm install
 COPY . .
 
 # Run tests - if this command fails, the build stage stops
-# RUN npm run test
+RUN npm run test
 
 # Build the app
 
