@@ -12,7 +12,7 @@ function filterOutEmptyPoints(data) {
 
 export {filterOutEmptyPoints};
 
-
+//
 // const data = [{RIC:[[1,2],[3,4]]},{VINAX:[[-12,34]]}]
 // console.log(filterOutEmptyPoints(data))
 //const data = [{ENPAG:[[]]}]
