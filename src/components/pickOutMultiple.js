@@ -57,6 +57,7 @@ function findObjectsWithMultipleCoordinates(results) {
 
 		}
 	} // end of for loop
+	console.log("inside pickOutMultiple.js line 60")
 	console.log(resultObjects)
 	//end of adding on 4/11/23
 //resultObjects for SIA833 = [{LAPUG:[[1.69, 103.41],[23, 117.38]]},

@@ -20,6 +20,23 @@ function convertObjectToArray(obj) {
   return Object.values(obj);
 }
 
+function filterObjectEntries(obj) {
+  let filteredObj = {};
+
+  Object.entries(obj).forEach(([key, value]) => {
+    if (Array.isArray(value) && value.length <= 2) {
+      filteredObj[key] = value;
+    }
+  });
+
+  return filteredObj;
+}
+
+function filterInnerArrays(arr) {
+  return arr.filter(innerArr => Array.isArray(innerArr) && innerArr.length <= 2);
+}
+
+
 // Start of the FlightPlan Component
 function FlightPlan() {
   const apiKey = '0b42b27c-8d1a-4d71-82c4-302c3ae19c51';
@@ -41,6 +58,7 @@ function FlightPlan() {
       console.log("results below:")
       console.log(results)
       const filteredResults = findObjectsWithMultipleCoordinates(results)
+      //findObjectsWithMultipleCoordinates function is in ./pickOutMultiple.js
       // filteredResults contain the multiple coordinates points with one of thier coordinate only
       
       // filteredResults = [{REVOP: [-30.55, 116.63]}]
@@ -51,10 +69,15 @@ function FlightPlan() {
       //newCleanedResults=[{ANITO: [-0.28,104.87]},{PKP:[-2.17, 106.14]},{TOPIR:[]},...]
       // function called removeObjectsWithEmptyValues will objects with empty array
       
-      
-      setCleanedResults(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults)))
+      const gointosetCleanedResults=filterObjectEntries(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults)))
+
+      setCleanedResults(gointosetCleanedResults)
+
+      const gointosetWayPoints=filterInnerArrays(convertObjectToArray(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults))))
+      //setCleanedResults(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults)))
       //cleanedResults = {PKP:[-0.28,10], KAT:[1,3],...}
-      setWayPoints(convertObjectToArray(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults))))
+      setWayPoints(gointosetWayPoints)
+      //setWayPoints(convertObjectToArray(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults))))
       // waypoints will look like [[],[],[],[]...]
       console.log("Below you might see cleanedResults variable: ")
       console.log(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults)))
@@ -334,7 +357,7 @@ catch (error) {
 
   return (
 	<div className="container">
-    {/* <ListOfFlights/> */}
+    <ListOfFlights/>
 
 		<form className="mt-3" onSubmit={handleSubmit}>
 	<div className="form-group">
