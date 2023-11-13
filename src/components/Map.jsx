@@ -46,7 +46,7 @@ function Map({data,waypoints}){
 	      if (!data) {
 		// You can render a loading state or a message here when data is null.
 		return (
-		  <div>Loading...</div>
+		  <div>Searching Flight Route...</div>
 		);
 	      }
 	return(

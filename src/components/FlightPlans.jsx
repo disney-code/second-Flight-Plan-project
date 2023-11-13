@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react';
-import axios from 'axios';
+//import axios, { all } from 'axios';
 import { apiCallNavFixAirport } from './callFixesApi.js';
 import {findObjectsWithMultipleCoordinates} from './pickOutMultiple.js'
 import {replaceObjects} from './cleanUpPointsNoduplicate.jsx'
@@ -25,7 +25,7 @@ function FlightPlan() {
   const apiKey = '0b42b27c-8d1a-4d71-82c4-302c3ae19c51';
   const flightPlanUrl=`http://118.189.146.180:9080/flight-manager/displayAll?apikey=${apiKey}`
 	const [flightNumber, setFlightNumber] = useState('');
-  
+  const [submitClicked, setSubmitClicked] = useState(false);
   const [results, setResults] = useState([]);
   const [loopDone,setLoopDone] = useState(false); 
   const [cleanedResults, setCleanedResults] = useState(null);
@@ -77,13 +77,24 @@ function FlightPlan() {
     setCleanedResults(null);
     setWayPoints(null);
     setDataNotFound(false)
+    setSubmitClicked(true);
       console.log("Submit button clicked")
       
 try{
   
-  const response = await axios.get(flightPlanUrl);
+  // const response = await axios.get(flightPlanUrl);
+  const response = await fetch(flightPlanUrl);
+  if (!response.ok) {
+    throw new Error(`API request failed with status ${response.status}`);
+  }
+
+  const allFlightPlans = await response.json();
   //response ={data: Array(4440), status:200, statusText :"OK"}
-  const allFlightPlans = response.data;
+  //const allFlightPlans = response.data;
+ console.log("here hseos")
+  console.log(response)
+  console.log("Show u allFlightPlans HEJER")
+  console.log("sdfsf ",allFlightPlans)
   console.log("response from Flight plan url ")
   //response.data =(4440)[{...},{...},{...},...]
   // each of {} in [] looks like 
@@ -95,9 +106,12 @@ let filteredFlightPlan
   try{
    filteredFlightPlan = allFlightPlans.filter((plan) =>
   plan.aircraftIdentification.toLowerCase() === flightNumber.toLowerCase()
-);}
+)
+console.log("This is how filteredFlightPlan looks:")
+console.log(filteredFlightPlan)
+;}
 catch(error){
-console.log("Failed to  find a flight with this number")
+console.log("Failed to  find a flight with this number 23")
 }
 
 
@@ -289,8 +303,6 @@ console.log("line 184")}
     for (let i = 0; i < designatedPoints.length; i++) {
       if (i===0 ||i === designatedPoints.length - 1){
         const item = designatedPoints[i];
-        console.log("Hai")
-        console.log("here is i:", i)
         await makeAirportCoordReq(item);
       }
       else{
@@ -314,7 +326,7 @@ console.log("line 184")}
 
 catch (error) {
   
-  console.error('error in FlightPlans.jsx file on line 247, API Error IN FlightPlans.jsx file:', error);
+  console.log('error in FlightPlans.jsx file on line 247, API Error IN FlightPlans.jsx file:', error);
 } 
 
 }; //end of handleSubmit
@@ -322,7 +334,7 @@ catch (error) {
 
   return (
 	<div className="container">
-    <ListOfFlights/>
+    {/* <ListOfFlights/> */}
 
 		<form className="mt-3" onSubmit={handleSubmit}>
 	<div className="form-group">
@@ -339,11 +351,17 @@ catch (error) {
       
       <button  type="submit" className="btn btn-primary">Submit</button>
       </form>
+
       <div>
-      {dataNotFound ? (
-        <p>Flight route for this flight is not known.</p>
-      ) : (
-        <Map data={cleanedResults} waypoints={waypoints} />
+        <p>After you press submit you will see your result below: </p>
+      </div>
+      <div data-testid="map-element">
+      {submitClicked && (
+        dataNotFound ? (
+          <p>Flight route for this flight is not known.</p>
+        ) : (
+          <Map data={cleanedResults} waypoints={waypoints} data-testid="map-element"/>
+        )
       )}
     </div>      
     </div>
