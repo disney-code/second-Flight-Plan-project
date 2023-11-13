@@ -12,10 +12,12 @@ function findObjectsWithMultipleCoordinates(results) {
 //   { ARROW: [ 19.84, 114.37 ] }
 // ] as these points had multiple coordinates prev
 	//results argument to this function look like [{RIC:[[1,2],[3,4]]},{ENPAG:[[]]},{VINAX:[[-12,34]]}] 
-	
+	// results is all the points associated with this flight number given by the API query
 	results = filterOutEmptyPoints(results)
+	//filterOutEmptyPoints is to remove objects who have no coordinates at all
 	//results  = [{HSN:[[29.93,122.36]]},{TOGUG:[[29.2, 122.53]]},{BEGMO:[[28,122.83]]},{LAPUG:[[1.69,103.41],[123,117.38]]},{BEBEM:[[22.95,116.36]]},{DOTMI:[[22.72,116.17]]},{MONTA:[21.56,116.20],[34.54,133.16],[10.92,122.52]},{ARROW:[-35,173.83],[19.84,114.37],[22.36,-155.21]},{EPDOS:[[19,113.56]]}]
 	const resultObjects = [];
+	// resultObjects holds the points with multiple coordinates and its partner that will help us identify which coordinate is most logical
 	let prevHasMultipleCoordinates = false;
       
 	for (let i = 0; i < results.length; i++) {

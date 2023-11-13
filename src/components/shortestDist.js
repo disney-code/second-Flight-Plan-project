@@ -23,20 +23,20 @@ function calculateDistance(coord1, coord2) {
 	return distance;
       }
       
-function findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES) {
-	//who calls findClosestKAT? pickOutMultiple.jsx
+function findClosestPoint(multi_coordinates_point, single_coordiante_point) {
+	//who calls findClosestCoordinate? pickOutMultiple.jsx
 	
-	let closestKAT = null;
+	let closestCoordinate = null;
 	let minDistance = Number.MAX_VALUE;
       
-	for (const key in NAVAID_COORDINATES) {
-	  if (Object.prototype.hasOwnProperty.call(NAVAID_COORDINATES, key)) {
-	    const coordinates = NAVAID_COORDINATES[key];
+	for (const key in multi_coordinates_point) {
+	  if (Object.prototype.hasOwnProperty.call(multi_coordinates_point, key)) {
+	    const coordinates = multi_coordinates_point[key];
 	    for (const coord of coordinates) {
-	      const distance = calculateDistance(coord, WAYPOINT_COORDINATES);
+	      const distance = calculateDistance(coord, single_coordiante_point);
 	      if (distance < minDistance) {
 		minDistance = distance;
-		closestKAT = {
+		closestCoordinate = {
 		  [key]: coord,
 		  
 		};
@@ -45,26 +45,26 @@ function findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES) {
 	  }
 	}
       
-	return closestKAT;
-	//closestKAT looks like { OKABU: [ 3.27, 94.85 ] }
+	return closestCoordinate;
+	//closestCoordinate looks like { OKABU: [ 3.27, 94.85 ] }
       }
       
 
 export {  findClosestPoint };
-// const NAVAID_COORDINATES = {
+// const multi_coordinates_point = {
 // 	KAT: [
 // 		[7.48, 28.31],
 // 		[-30.55, 116.63]
 // 	],
 //       };
-//       const WAYPOINT_COORDINATES =  [-31.42, 116.29]
+//       const single_coordiante_point =  [-31.42, 116.29]
 //       console.log("look below:")
-// console.log(findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES))
+// console.log(findClosestPoint(multi_coordinates_point, single_coordiante_point))
 
-//findClosestPoint(NAVAID_COORDINATES, WAYPOINT_COORDINATES)={ KAT: [ -30.55, 116.63 ] }
+//findClosestPoint(multi_coordinates_point, single_coordiante_point)={ KAT: [ -30.55, 116.63 ] }
 //for SIA242, it is giving error because the first one the one with multiple coordinate
-//NAVAID_COORDINATES ={RIC:[
+//multi_coordinates_point ={RIC:[
 //[37.5, -77.32],[-33.61, 150.8],[-33.6, 150.78]
 //]}
-//WAYPOINT_COORDINATES =[]
+//single_coordiante_point =[]
 

@@ -79,8 +79,7 @@ function FlightPlan() {
       setWayPoints(gointosetWayPoints)
       //setWayPoints(convertObjectToArray(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults))))
       // waypoints will look like [[],[],[],[]...]
-      console.log("Below you might see cleanedResults variable: ")
-      console.log(mergeObjects(removeObjectsWithEmptyValues(newCleanedResults)))
+
   }}, [results,loopDone]);
 
   // When either results or loopDone changes, useEffect runs once
@@ -146,10 +145,11 @@ const firstMatchingFlightPlan = filteredFlightPlan.find((plan) =>
 if (!firstMatchingFlightPlan){
   console.log("Flight Route for this Flight Number is not available")
   setDataNotFound(true);
+  // After this if block is executed, the handleSubmit function has completed
 }
 
 else
-{ // else line 104 to 238
+{ // else line 152 to 346
 
 //{_id: '653c72118e0fa50dcab3e049', messageType: 'ATFM', aircraftIdentification: 'SIA215', filedRoute: {…}, flightType: 'S', …}
 
@@ -171,9 +171,11 @@ else
   designatedPoints.push(destinationAerodrome)
   console.log("Designated Points: ",designatedPoints)
 
-  // designatedPoints=["KAT", "YASH",...]
+  // designatedPoints=['WSSS', 'ANITO', 'PKP', 'LAMOB', 'IDOKU', 'TOPIR', 'REVOP', 'JULIM', 'YPPH']
 
 async function makeAirportCoordReq(point){
+  // This function is from line 177 to 207
+  // This function end goal is to update the results state variable with the airport coordinates
 try{
   console.log("Calling for Airport coordinate for point: ")
   console.log(point)
@@ -206,7 +208,8 @@ catch(error){
 
 
   async function makeApiRequest(point) {
-   
+   // THis function is from line 211 to 326
+   // This function end goal is to update results variable with the point's coordinate
     // every point (e.g REVOP) will call makeApiRequest once 
     try {
       
