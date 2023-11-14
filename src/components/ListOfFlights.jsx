@@ -31,7 +31,7 @@ function ListOfFlights() {
 
   return (
     <div>
-      <h2>View flights:</h2>
+      <h2>View flights on 14 November 2023:</h2>
       {loading ? ( // Display a loading message while data is being fetched
         <p>Loading...</p>
       ) : (

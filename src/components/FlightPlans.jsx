@@ -57,6 +57,7 @@ function FlightPlan() {
       console.log("Inside flightplans.jsx: ")
       console.log("results below:")
       console.log(results)
+      //results can look like = [{LFPG: [49.01, 2.55]}, {BUBLI:[48.77, 4.15]},...]
       const filteredResults = findObjectsWithMultipleCoordinates(results)
       //findObjectsWithMultipleCoordinates function is in ./pickOutMultiple.js
       // filteredResults contain the multiple coordinates points with one of thier coordinate only
